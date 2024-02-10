@@ -46,7 +46,10 @@
       <?php if(!empty($errores)): ?>
         <div>
           <ul>
-            <?php echo $errores; ?>
+            <li class="text-center w-full bg-red-500 p-2 rounded-sm">
+            <?php  echo ($errores); ?>
+            </li>
+            
           </ul>
         </div>
         <?php endif; ?>

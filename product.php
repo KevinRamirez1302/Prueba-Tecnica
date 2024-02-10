@@ -1,5 +1,4 @@
 <?php
-
     try{
 
     $conexion =new PDO('mysql:host=localhost;dbname=gestion_venta','root','Japon1302$');
@@ -19,7 +18,7 @@
    
 
 
-require('./navbar.php');
+require('./src/navbar.php');
 require('./src/product.view.php');
 
 ?>

@@ -1,15 +1,14 @@
 <?php session_start();
 
-ini_set('display_errors', 1);
-error_reporting(E_ALL);
 
 if (isset($_SESSION['usuario'])){
-    header("Location: index.php");
+    header("Location:index.php");
+    exit();
 };
 
 $errores = '';
 
-if ($_SERVER['REQUEST_METHOD'] == " POST" ){
+if ($_SERVER['REQUEST_METHOD'] == "POST" ){
     $usuario = $_POST['usuario'];
     $pass = $_POST['password'];
 
@@ -21,12 +20,12 @@ if ($_SERVER['REQUEST_METHOD'] == " POST" ){
         echo $e -> getMessage();
     }
 
-    $statement= $conexion->prepare('SELECT * FROM usuarios WHERE usuario = :user AND clave = :pass');
+    $statement= $conexion->prepare('SELECT * FROM usuario WHERE usuario = :user AND clave = :passw');
 
-    $statement-> execute(array(
-        ':usuario' => $usuario,
-        ':pass' => $pass
-    ));
+    $statement->bindParam(':user', $usuario);
+    $statement->bindParam(':passw', $pass);
+
+    $statement->execute();
 
     $resultado = $statement-> fetch();
 
@@ -34,13 +33,12 @@ if ($_SERVER['REQUEST_METHOD'] == " POST" ){
         $_SESSION['usuario'] = $usuario;
         header('Location: index.php');
     } else {
-        $errores .= '<li>Datos incorrectos<li/>';
+        $errores .= 'Datos incorrectos';
     }
     
 
 }
 
-require './navbar.php';
 require './src/login.view.php';
 
 ?>

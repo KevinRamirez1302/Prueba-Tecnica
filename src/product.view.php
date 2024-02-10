@@ -35,7 +35,8 @@
             </h3>
             <p class="mt-1 text-sm text-gray-500">Black</p>
           </div>
-          <p class="text-sm font-medium text-gray-900">$<?php echo $p['precio']?></p>
+          <p>Subtotal</p>
+          <p class="text-sm font-medium text-gray-900">$<?php echo round($p['precio'] * 1.16,2)?></p>
           
         </div>
       </div>  
