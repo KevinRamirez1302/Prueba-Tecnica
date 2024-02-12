@@ -144,7 +144,4 @@ ALTER TABLE producto ADD INDEX idx_producto (id,descripcion,categoria,precio,ima
 
 ALTER TABLE usuario ADD INDEX idx_usuario (nombre, correo);
 
-
-
-SELECT * producto;
-
+SELECT idusuario FROM usuario WHERE usuario = 'vendedor1';

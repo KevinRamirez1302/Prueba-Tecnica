@@ -1,43 +1,63 @@
 <?php session_start();
 
-$errores = '';
-$id = $_GET['id'];
-
+$errors = '';
+$success = '';
+$user = $_SESSION['usuario'];
+require('./funciones/obtenerid.php');
 
 if($_SERVER['REQUEST_METHOD'] == "POST"){
     $name = strtolower($_POST['nombre']);
-    $price = filter_var($_POST['precio'], FILTER_VALIDATE_FLOAT);
+    $price = $_POST['precio'];
     $img = $_POST['img'];
     $category = $_POST['categoria'];
    
-
-    if( empty($name) or empty($price) or empty($img) or empty($category)){
-        $errores .= '<li>Por favor rellena todos los datos</li>';
+    if (empty($name) || empty($price) || empty($img) || empty($category)) {
+        $errors .= 'Por favor rellena todos los datos';
     } else {
-        try{
-            $conexion = new PDO('mysql:host=localhost;dbname=gestion_venta','root','Japon1302$');
-
-        }catch(PDOException $e){
-            $e->getMessage();
+        
+        if (!preg_match('/^[a-zA-Z\s]+$/', $name)) {
+            $errors .= 'El nombre debe contener solo letras y espacios';
         }
+        if (!is_numeric($price) || $price <= 0) {
+            $errors .= 'El precio debe ser un número positivo';
+        }
+       
     }
     
-
-    $statement= $conexion->prepare('INSERT INTO producto (imagen,descripcion,precio,categoria,existencia,usuario_id) VALUES
-    ( :img, :nom, :pre , :cate , 3,:idu);');
-
-    $statement->bindParam(':nom', $name);
-    $statement->bindParam(':pre', $price);
-    $statement->bindParam(':img', $img);
-    $statement->bindParam(':cate', $category);
-    $statement->bindParam(':idu', $id);
+    
+      
+    $conexion = conectar();
+          
+    
+    if(empty($errors)){
+        //RECUPERAR ID DE USUARIO    
 
     
-    $statement->execute();
+    $resultado = extraerID($user);
+
+
+    // Agregar producto
     
 
+     $statement= $conexion->prepare('INSERT INTO producto (imagen,descripcion,precio,categoria,existencia,usuario_id) VALUES
+    ( :img, :nom, :pre , :cate , 3, :usuarioid);');
+
+     $statement->bindParam(':nom', $name);
+     $statement->bindParam(':pre', $price);
+     $statement->bindParam(':img', $img);
+     $statement->bindParam(':cate', $category);
+     $statement->bindParam(':usuarioid', $resultado['idusuario']);
+     $statement->execute();
+     $success = 'Producto guardado';
+    } else {
+        $errors = 'POR FAVOR INGRESA DATOS VALIDOS';
+    }
+   
+
+    
+        
+     
 }
-
 
 
 require ('./src/navbar.php');
