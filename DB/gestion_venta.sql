@@ -54,12 +54,12 @@ CREATE TABLE cliente (
 --
 
 
-INSERT INTO cliente (idcliente, nombre, telefono, direccion, usuario_id) VALUES
-('carlos gonzales', '8296826298', 'Centro', 1),
-('samuel flores', '2147483647', 'Carrera 28 entre 9 y 10', 2),
-('fernando galindez', '2147483647', 'Carrera 48 entre 9 y 10', 2),
-('leonel messi', '2147483647', 'Rosario,argentina', 2),
-('franco mazza', '2147483647', 'Pedregal', 1);
+INSERT INTO cliente (idcliente, nombre, telefono, direccion, usuario_id,documento) VALUES
+('carlos gonzales', '8296826298', 'Centro', 1,3242345),
+('samuel flores', '2147483647', 'Carrera 28 entre 9 y 10', 2,4553455),
+('fernando galindez', '2147483647', 'Carrera 48 entre 9 y 10', 2,45375873),
+('leonel messi', '2147483647', 'Rosario,argentina', 2,56732456),
+('franco mazza', '2147483647', 'Pedregal', 1,763216783);
 
 --
 -- Se crea la tabla para productos
