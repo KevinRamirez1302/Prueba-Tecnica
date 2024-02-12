@@ -39,12 +39,12 @@ INSERT INTO usuario (nombre, correo, usuario, clave) VALUES
 --
 
 CREATE TABLE cliente (
-  idcliente int(11) auto_increment NOT NULL,
+  idcliente INT auto_increment NOT NULL,
   nombre varchar(100) NOT NULL,
   telefono varchar(15) NOT NULL,
   direccion varchar(200) NOT NULL,
   usuario_id int(11) NOT NULL,
-  documento INT(10) NOT NULL,
+  documento INT(30) NOT NULL,
   FOREIGN KEY(usuario_id) REFERENCES usuario(idusuario),
   PRIMARY KEY (idcliente)
   
@@ -54,7 +54,7 @@ CREATE TABLE cliente (
 --
 
 
-INSERT INTO cliente (idcliente, nombre, telefono, direccion, usuario_id,documento) VALUES
+INSERT INTO cliente( nombre, telefono, direccion, usuario_id,documento) VALUES
 ('carlos gonzales', '8296826298', 'Centro', 1,3242345),
 ('samuel flores', '2147483647', 'Carrera 28 entre 9 y 10', 2,4553455),
 ('fernando galindez', '2147483647', 'Carrera 48 entre 9 y 10', 2,45375873),
