@@ -1,5 +1,6 @@
 <?php session_start();
 
+require('./funciones/obtenerid.php');
 
 if (isset($_SESSION['usuario'])){
     header("Location:index.php");

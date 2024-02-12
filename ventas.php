@@ -23,12 +23,14 @@
     INNER JOIN usuario ON detalle_venta.id_usuario = :user
     INNER JOIN cliente ON detalle_venta.id_usuario = :user
     INNER JOIN producto ON detalle_venta.id_usuario = :user
-    INNER JOIN ventas ON detalle_venta.id_usuario = :user LIMIT 8;');
+    INNER JOIN ventas ON detalle_venta.id_usuario = :user LIMIT 5;');
     $statement->bindParam(':user', $id);
 
     $statement->execute();
 
     $resultado = $statement->fetchAll();
+
+    
     
 
    
